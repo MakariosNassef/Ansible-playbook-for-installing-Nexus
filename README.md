@@ -35,5 +35,7 @@ Nexus is a popular repository manager used in DevOps environments to store, mana
   - Replace hosts with your inventory file containing the target system information.
 
 ## output
+
+![image](https://user-images.githubusercontent.com/28235504/218210374-afe71516-e8cd-40e6-bce9-74837b161278.png)
 ![image](https://user-images.githubusercontent.com/28235504/218207610-37b346c9-0dc6-4781-8b22-56bdd28397f7.png)
 
