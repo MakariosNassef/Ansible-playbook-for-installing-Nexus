@@ -1,0 +1,32 @@
+# Ansible playbook for installing Nexus
+
+This playbook is designed to automate the installation process of Sonatype Nexus 3 on a Linux system.
+Nexus is a popular repository manager used in DevOps environments to store, manage and distribute software components, binaries, and other artifacts.
+
+Here's an overview of the tasks performed by this playbook:
+
+1. Update and install wget.
+2. Install Java 1.8.
+3. Create the /app directory.
+4. Download the latest Nexus artifact.
+5. Extract Nexus.
+6. Rename the untarred directory.
+7. Create a nexus user.
+8. Change ownership of Nexus files to the Nexus user.
+9. Change ownership of the Nexus data directory to the Nexus user.
+10. Uncomment the run_as_user parameter in the /app/nexus/bin/nexus.rc file.
+11. Create a symlink for the Nexus service script.
+12. Start and enable the Nexus service.
+
+
+## In this lab, I utilized an EC2 instance as the managed node and my local machine as the control node.
+
+## Prerequisites
+A Linux system with Ansible installed.
+A root user or an account with sudo privileges.
+Internet connectivity to download the Nexus artifact.
+Usage
+Clone the repository containing this playbook.
+Run the playbook using the following command:
+``` ansible-playbook -i hosts nexus-playbook.yml ```
+Replace hosts with your inventory file containing the target system information.

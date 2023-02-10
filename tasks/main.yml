@@ -1,0 +1,79 @@
+---
+- name: Install Latest Sonatype Nexus 3 on Linux
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update and install wget
+      apt:
+        name: wget
+        state: present
+        update_cache: yes
+
+    - name: install Java 1.8
+      apt:
+        name: openjdk-8-jdk
+        state: present
+
+    - name: Creates directory
+      file:
+        path:  "{{ directory }}"
+        state: directory
+    
+    - name: Download the latest Nexus artifact
+      get_url:
+        url: https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+        dest: "{{ directory }}"
+
+    - name: Extract Nexus
+      unarchive:
+        src: /app/nexus-3.47.1-01-unix.tar.gz
+        dest: "{{ directory }}"
+        remote_src: yes
+      register: extract_result
+    
+    - name: Rename the untarred directory
+      file:
+        src: /app/nexus-3.47.1-01
+        dest: /app/nexus
+        state: link
+    
+    - name: Create nexus user
+      user:
+        name: nexus
+        state: present
+
+    - name: Change ownership of nexus files to nexus user
+      file:
+        path: /app/nexus
+        owner: "{{ ownership_nexus }}"
+        group: "{{ ownership_nexus }}"
+        mode: 0777
+    
+    - name: Change ownership of nexus data directory to nexus user
+      file:
+        path: /app/nexus/data
+        owner: "{{ ownership_nexus }}"
+        group: "{{ ownership_nexus }}"
+        recurse: yes
+
+    - name: Uncomment run_as_user parameter
+      lineinfile:
+        path: /app/nexus/bin/nexus.rc
+        state: present
+        regexp: '^#run_as_user='
+        line: 'run_as_user=nexus'
+
+    - name: run command
+      command: ln -s /app/nexus/bin/nexus /etc/init.d/nexus
+      register: root
+       
+    - name: Start & Enable Nexus
+      systemd:
+        name: nexus
+        state: started
+        enabled: true
+        
+    - name: Start service nexus
+      service:
+        name: nexus
+        state: started
