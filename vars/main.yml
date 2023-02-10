@@ -1,4 +1,0 @@
----
-# vars file for Nexus
-directory  : /app
-ownership_nexus : nexus
