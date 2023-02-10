@@ -31,7 +31,7 @@ Nexus is a popular repository manager used in DevOps environments to store, mana
 ### Usage
   - Clone the repository containing this playbook.
   - Run the playbook using the following command:
-  - ``` ansible-playbook -i hosts nexus-playbook.yml ```
+  - ``` ansible-playbook -i inventory --extra-vars "@vars.yml" tasks/main.yml ```
   - Replace hosts with your inventory file containing the target system information.
 
 ## output
