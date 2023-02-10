@@ -20,6 +20,8 @@ Nexus is a popular repository manager used in DevOps environments to store, mana
 
 
 ## In this lab, I utilized an EC2 instance as the managed node and my local machine as the control node.
+![image](https://user-images.githubusercontent.com/28235504/218207407-065876f1-28c7-4415-b707-417e9f462e26.png)
+
 
 ### Prerequisites
   - A Linux system with Ansible installed.
@@ -31,3 +33,7 @@ Nexus is a popular repository manager used in DevOps environments to store, mana
   - Run the playbook using the following command:
   - ``` ansible-playbook -i hosts nexus-playbook.yml ```
   - Replace hosts with your inventory file containing the target system information.
+
+## output
+![image](https://user-images.githubusercontent.com/28235504/218207610-37b346c9-0dc6-4781-8b22-56bdd28397f7.png)
+
