@@ -77,3 +77,4 @@
       service:
         name: nexus
         state: started
+        
